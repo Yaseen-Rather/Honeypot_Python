@@ -10,6 +10,9 @@ import paramiko
 # Constants
 
 logging_format = logging.Formatter('%(message)s')
+SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
+
+host_key = 'server.key'
 
 #loggers & logging files
 
@@ -100,5 +103,41 @@ class Server(paramiko.ServerInterface):
         command = str(command)
         return True
 
-    
+def client_handle(client, addr, username, password):
+    client_ip = addr[0]
+    print(f"{client_ip} has connected to the server.")
+
+
+    try:
+        
+        transport = paramiko.Transport()
+        transport.local_version = SSH_BANNER
+        server = Server(client_ip=client_ip, input_username=username, input_password=password)
+
+        transport.add_server_key(host_key)
+
+        transport.start_server(server=server)
+
+        channel = transport.accept(100)   
+        if channel is None
+            print("No channel was opened.")
+
+        standard_banner = "Welcome to Ubantu 22.04 LTS (Jammy Jellyfish)!\r\n\r\n"
+        channel.send(standard_banner)
+        emulated_shell(channel, client_ip=client_ip)
+
+    except Exception as error:
+        print(error)
+        print("!!! Error !!!")
+
+    finally:
+        try:
+            transport.close()
+        except Exception as error:
+            print(error)
+            print("!!! Error !!!")
+        client.close()
+
+
+ # Provision SSH-based Honeypot
         
