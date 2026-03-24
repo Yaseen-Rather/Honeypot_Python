@@ -119,7 +119,7 @@ def client_handle(client, addr, username, password):
         transport.start_server(server=server)
 
         channel = transport.accept(100)   
-        if channel is None
+        if channel is None:
             print("No channel was opened.")
 
         standard_banner = "Welcome to Ubantu 22.04 LTS (Jammy Jellyfish)!\r\n\r\n"
@@ -140,4 +140,8 @@ def client_handle(client, addr, username, password):
 
 
  # Provision SSH-based Honeypot
-        
+
+    def honeypot(address, port, username, password):
+
+            socks = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            socks.setsockopt(socket.SOL)
