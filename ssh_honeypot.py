@@ -50,15 +50,20 @@ def emulated_shell(channel, client_ip):
 
             elif command.strip() == b'pwd':
                 response = b"\n" + b'\\usr\local' + b"\r\n"
+                creds_logger.info(f'Command {command.strip()}' + 'executed by ' + f'{client_ip}')
+
 
             elif command.strip() == b'whoami':
                 response = b"\n" + b"corpuser1" + b"\r\n"
+                creds_logger.info(f'Command {command.strip()}' + 'executed by ' + f'{client_ip}')
 
             elif command.strip() == b'ls':
                 response = b'\n' + b"jumpbox1.conf" + b"\r\n"
+                creds_logger.info(f'Command {command.strip()}' + 'executed by ' + f'{client_ip}')
 
             elif command.strip() == b'cat jumpbox1.conf':
                 response = b'\n' + b"My name is Jeff." + b"\r\n"
+                creds_logger.info(f'Command {command.strip()}' + 'executed by ' + f'{client_ip}')
 
             else:
                 response = b"\n" + bytes(command.strip()) + b"\r\n"
@@ -168,4 +173,4 @@ def honeypot(address, port, username, password):
             except Exception as error:
                 print(error)
 
-honeypot('127.0.0.1', 2223, 'username', 'password')
+honeypot('127.0.0.1', 2223, username=None, password=None)
