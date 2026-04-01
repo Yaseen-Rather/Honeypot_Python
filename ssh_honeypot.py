@@ -336,8 +336,13 @@ def honeypot(address, port, username, password):
     print(f"SSH server is listening on port {port}.")
 
     while True:
+        
         try:
             client, addr = socks.accept()
+            
+            print(f"\n[+] New connection from {addr[0]}:{addr[1]}")
+            funnel_logger.info(f'New connection from {addr[0]}:{addr[1]}')
+
             ssh_honeypot_thread = threading.Thread(target=client_handle, args=(client, addr, username, password))
             ssh_honeypot_thread.start()
 
