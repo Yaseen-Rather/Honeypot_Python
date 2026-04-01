@@ -1,3 +1,11 @@
+#   =========================================================================================
+#                                       SSH Honeypot
+#   =========================================================================================
+
+# Sources:
+# 1) Grant Collins Youtube Video
+# 2) Claude for code cleanup and For increasing the emulated shell scope.
+
 #libraries
 
 import logging
